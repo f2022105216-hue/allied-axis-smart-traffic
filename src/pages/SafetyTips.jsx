@@ -1,14 +1,24 @@
 import { motion } from 'framer-motion'
+import { CarFront, Shield, Users } from 'lucide-react'
 import { safetyTips } from '../data/safetyTips'
 import SafetyTipCard from '../components/SafetyTipCard'
+import SafetyShortVideo from '../components/SafetyShortVideo'
+import PageBackdrop from '../components/PageBackdrop'
 
 function SafetyTips() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <PageBackdrop variant="safety" />
       {/* Road Safety Tips Section */}
       <div className="mb-10 max-w-2xl">
         <p className="text-sm uppercase tracking-[0.25em] text-emerald-300">Road safety</p>
         <h1 className="mt-3 text-4xl font-black text-white">Practical safety guidance for everyone</h1>
+      </div>
+
+      <div className="mb-8 grid gap-4 md:grid-cols-3">
+        <SafetyShortVideo icon={<CarFront className="h-8 w-8" />} title="Drive defensively" accent="emerald" />
+        <SafetyShortVideo icon={<Shield className="h-8 w-8" />} title="Wear your safety gear" accent="cyan" />
+        <SafetyShortVideo icon={<Users className="h-8 w-8" />} title="Stay alert together" accent="amber" />
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">

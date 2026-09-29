@@ -51,3 +51,265 @@ select {
   background: rgba(16, 185, 129, 0.4);
   color: white;
 }
+
+body {
+  background:
+    radial-gradient(circle at top, rgba(16, 185, 129, 0.12), transparent 25%),
+    #020617;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(16,185,129,0.14), transparent 20%), radial-gradient(circle at 80% 0%, rgba(34,211,238,0.08), transparent 20%);
+  pointer-events: none;
+  animation: ambientGlow 12s ease-in-out infinite alternate;
+}
+
+@keyframes ambientGlow {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.08); }
+}
+
+.traffic-road {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.28));
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.08);
+}
+
+.traffic-road::before,
+.traffic-road::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.04) 0,
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 1px,
+    transparent 18%
+  );
+  background-size: 22% 100%;
+  opacity: 0.7;
+}
+
+.traffic-road::after {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(16, 185, 129, 0.3),
+    rgba(6, 182, 212, 0.05),
+    transparent
+  );
+  background-size: 100% 100%;
+  opacity: 0.9;
+}
+
+.success-swal-popup {
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 25px 70px rgba(16, 185, 129, 0.18);
+}
+
+.success-swal-title {
+  color: #f8fafc !important;
+  font-size: 1.4rem !important;
+}
+
+.success-swal-html {
+  padding: 0.5rem 0 0.25rem !important;
+}
+
+.success-alert-pedestrian-video {
+  position: relative;
+  height: 88px;
+  overflow: hidden;
+  margin: 0 0 0.8rem;
+  border: 1px solid rgba(52, 211, 153, 0.24);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(251, 191, 36, 0.16), rgba(14, 116, 144, 0.18) 45%, rgba(15, 23, 42, 0.92));
+}
+
+.success-alert-sun {
+  position: absolute;
+  top: 9px;
+  right: 14px;
+  color: #fde68a;
+  font-size: 1.1rem;
+  animation: sweetSun 2.8s ease-in-out infinite;
+}
+
+.success-alert-heart {
+  position: absolute;
+  top: 16px;
+  left: 25%;
+  color: #fda4af;
+  font-size: 0.9rem;
+  animation: sweetHeart 2.2s ease-in-out infinite;
+}
+
+.success-alert-skyline {
+  position: absolute;
+  inset: auto 0 28px;
+  height: 28px;
+  opacity: 0.45;
+  background: repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.35) 0 18px, transparent 18px 32px);
+}
+
+.success-alert-crosswalk {
+  position: absolute;
+  inset: auto 0 0;
+  height: 28px;
+  background: repeating-linear-gradient(105deg, transparent 0 12px, rgba(226, 232, 240, 0.7) 12px 20px, transparent 20px 32px);
+}
+
+.success-alert-pedestrian {
+  position: absolute;
+  left: -28px;
+  bottom: 23px;
+  width: 24px;
+  height: 42px;
+  animation: pedestrianCrossing 3.8s ease-in-out infinite;
+}
+
+.success-alert-pedestrian span {
+  position: absolute;
+  display: block;
+  background: #a7f3d0;
+}
+
+.pedestrian-head {
+  top: 0;
+  left: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.pedestrian-body {
+  top: 10px;
+  left: 10px;
+  width: 6px;
+  height: 18px;
+  border-radius: 5px;
+}
+
+.pedestrian-arm {
+  top: 12px;
+  width: 4px;
+  height: 17px;
+  border-radius: 4px;
+  transform-origin: top center;
+}
+
+.pedestrian-arm-left {
+  left: 6px;
+  transform: rotate(28deg);
+}
+
+.pedestrian-arm-right {
+  right: 4px;
+  transform: rotate(-28deg);
+}
+
+.pedestrian-leg {
+  top: 26px;
+  width: 5px;
+  height: 17px;
+  border-radius: 4px;
+  transform-origin: top center;
+}
+
+.pedestrian-leg-left {
+  left: 8px;
+  animation: pedestrianStepLeft 0.55s ease-in-out infinite alternate;
+}
+
+.pedestrian-leg-right {
+  left: 13px;
+  animation: pedestrianStepRight 0.55s ease-in-out infinite alternate;
+}
+
+.success-swal-button {
+  border-radius: 999px !important;
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.35) !important;
+  font-weight: 700 !important;
+  padding: 0.8rem 1.5rem !important;
+}
+
+.success-alert-shell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.35rem 0.2rem 0.25rem;
+  text-align: left;
+}
+
+.success-alert-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.3), rgba(16, 185, 129, 0.1));
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  color: #a7f3d0;
+  font-size: 1.8rem;
+  font-weight: 900;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+  animation: pulseGlow 1.7s ease-in-out infinite;
+}
+
+.success-alert-copy {
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 0.96rem;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(16, 185, 129, 0.1); }
+  50% { transform: scale(1.06); box-shadow: 0 0 30px rgba(16, 185, 129, 0.26); }
+}
+
+@keyframes pedestrianCrossing {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(190px); }
+  100% { transform: translateX(380px); }
+}
+
+@keyframes sweetSun {
+  0%, 100% { transform: rotate(-8deg) scale(1); opacity: 0.8; }
+  50% { transform: rotate(8deg) scale(1.12); opacity: 1; }
+}
+
+@keyframes sweetHeart {
+  0%, 100% { transform: translateY(3px) scale(0.85); opacity: 0.35; }
+  50% { transform: translateY(-5px) scale(1.1); opacity: 1; }
+}
+
+@keyframes pedestrianStepLeft {
+  from { transform: rotate(24deg); }
+  to { transform: rotate(-24deg); }
+}
+
+@keyframes pedestrianStepRight {
+  from { transform: rotate(-24deg); }
+  to { transform: rotate(24deg); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,12 +1,14 @@
 import { useMemo, useState } from 'react'
-import { Search, SlidersHorizontal } from 'lucide-react'
+import { ChevronDown, Search, SlidersHorizontal } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { trafficData } from '../data/trafficData'
 import TrafficCard from '../components/TrafficCard'
+import PageBackdrop from '../components/PageBackdrop'
 
 function Traffic() {
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState('All')
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   const filteredTraffic = useMemo(() => {
     return trafficData.filter((item) => {
@@ -19,7 +21,8 @@ function Traffic() {
   const statusFilters = ['All', 'Low', 'Moderate', 'Heavy', 'Blocked']
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <PageBackdrop variant="traffic" />
       {/* Traffic Dashboard Section */}
       <div className="mb-10">
         <p className="text-sm uppercase tracking-[0.25em] text-emerald-300">Traffic dashboard</p>
@@ -47,25 +50,51 @@ function Traffic() {
             />
           </label>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-300">
-              <SlidersHorizontal className="h-4 w-4 text-emerald-300" />
-              Filters
-            </div>
-            {statusFilters.map((statusOption) => (
+          <div className="relative flex items-center">
+            <div className="relative">
               <button
-                key={statusOption}
                 type="button"
-                onClick={() => setFilter(statusOption)}
-                className={`rounded-full px-3 py-2 text-sm font-medium transition ${
-                  filter === statusOption
-                    ? 'bg-emerald-500 text-slate-950'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-                }`}
+                onClick={() => setIsFilterOpen((prev) => !prev)}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 shadow-[0_0_0_1px_rgba(148,163,184,0.08)] transition hover:border-emerald-400/60"
               >
-                {statusOption}
+                <SlidersHorizontal className="h-4 w-4 text-emerald-300" />
+                <span>Filters</span>
+                <ChevronDown
+                  className={`h-4 w-4 text-slate-300 transition-transform duration-200 ${
+                    isFilterOpen ? 'rotate-180' : ''
+                  }`}
+                />
               </button>
-            ))}
+
+              {isFilterOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.18 }}
+                  className="absolute left-0 top-full z-20 mt-2 w-44 overflow-hidden rounded-xl border border-slate-700 bg-slate-950 shadow-[0_18px_40px_rgba(2,6,23,0.65)]"
+                >
+                  {statusFilters.map((statusOption) => (
+                    <button
+                      key={statusOption}
+                      type="button"
+                      onClick={() => {
+                        setFilter(statusOption)
+                        setIsFilterOpen(false)
+                      }}
+                      className={`flex w-full items-center justify-between px-3 py-2.5 text-left text-sm transition ${
+                        filter === statusOption
+                          ? 'bg-emerald-500/12 text-emerald-200'
+                          : 'text-slate-300 hover:bg-slate-800'
+                      }`}
+                    >
+                      <span>{statusOption}</span>
+                      {filter === statusOption && <span className="text-xs text-emerald-300">✓</span>}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </div>
           </div>
         </div>
       </motion.div>

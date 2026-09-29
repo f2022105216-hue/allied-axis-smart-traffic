@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import AppSplash from './components/AppSplash'
 import Home from './pages/Home'
 import Traffic from './pages/Traffic'
 import Alerts from './pages/Alerts'
@@ -13,11 +16,19 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsLoading(false), 1500)
+    return () => window.clearTimeout(timer)
+  }, [])
+
   return (
     <Router>
+      <AnimatePresence>{isLoading && <AppSplash />}</AnimatePresence>
       <div className="min-h-screen bg-slate-950 text-white">
         <Navbar />
-        <main>
+        <main className="relative">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/traffic" element={<Traffic />} />

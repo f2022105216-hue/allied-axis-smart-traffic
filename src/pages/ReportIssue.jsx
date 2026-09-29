@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import showSuccessAlert from '../utils/showSuccessAlert'
+import PageBackdrop from '../components/PageBackdrop'
 
 const initialData = {
   name: '',
@@ -40,11 +42,13 @@ function ReportIssue() {
     if (Object.keys(newErrors).length === 0) {
       setSubmitted(true)
       setFormData(initialData)
+      showSuccessAlert('Issue reported!', 'Your road safety concern has been recorded and the team will review it shortly.')
     }
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <PageBackdrop variant="emergency" />
       {/* Report an Issue Section */}
       <div className="mb-10">
         <p className="text-sm uppercase tracking-[0.25em] text-emerald-300">Report an issue</p>

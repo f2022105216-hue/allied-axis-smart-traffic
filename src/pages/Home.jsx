@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, AlertTriangle, BellRing, CarFront, MapPinned, ShieldCheck, Siren, Users } from 'lucide-react'
+import { ArrowRight, BellRing, CarFront, MapPinned, ShieldCheck, Siren } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { trafficData } from '../data/trafficData'
 import { alerts } from '../data/alerts'
@@ -9,6 +9,9 @@ import TrafficCard from '../components/TrafficCard'
 import AlertCard from '../components/AlertCard'
 import SafetyTipCard from '../components/SafetyTipCard'
 import TrafficSignCard from '../components/TrafficSignCard'
+import PageBackdrop from '../components/PageBackdrop'
+import TrafficSafetyVideo from '../components/TrafficSafetyVideo'
+import heroImage from '../assets/hero.png'
 
 function Home() {
   const statusHighlights = [
@@ -19,10 +22,42 @@ function Home() {
   ]
 
   return (
-    <div className="bg-slate-950 text-white">
+    <div className="relative bg-slate-950 text-white">
+      <PageBackdrop variant="traffic" />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.18),_transparent_35%),linear-gradient(135deg,#020617_0%,#0f172a_40%,#111827_100%)]">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-28">
+        <motion.div
+          className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+          aria-hidden="true"
+        >
+          <motion.img
+            src={heroImage}
+            alt=""
+            className="h-full w-full object-cover opacity-30"
+            initial={{ scale: 1.04, x: '-1%' }}
+            animate={{ scale: [1.04, 1.1, 1.04], x: ['-1%', '1%', '-1%'] }}
+            transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.72)_0%,rgba(2,6,23,0.48)_44%,rgba(2,6,23,0.34)_100%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20" />
+        </motion.div>
+        <motion.div
+          className="absolute inset-0 overflow-hidden"
+          aria-hidden="true"
+        >
+          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'linear-gradient(rgba(16,185,129,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,0.08) 1px, transparent 1px)', backgroundSize: '120px 120px' }} />
+          {[0, 1, 2, 3, 4].map((line) => (
+            <motion.div
+              key={line}
+              className="absolute h-px w-52 bg-gradient-to-r from-transparent via-emerald-400/90 to-transparent"
+              style={{ top: `${18 + line * 17}%`, left: `${8 + line * 14}%` }}
+              animate={{ x: [0, 100, 0], opacity: [0.2, 1, 0.2] }}
+              transition={{ duration: 6 + line, repeat: Infinity, ease: 'easeInOut', delay: line * 0.25 }}
+            />
+          ))}
+        </motion.div>
+
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-28">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,33 +122,7 @@ function Home() {
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.08 }}
             className="relative"
           >
-            <div className="absolute inset-0 -z-10 rounded-[2rem] bg-emerald-500/10 blur-3xl" />
-            <div className="rounded-[2rem] border border-slate-800 bg-slate-900/80 p-6 shadow-2xl shadow-emerald-950/30">
-              <div className="mb-6 flex items-center justify-between">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.22em] text-slate-400">City status</p>
-                  <h2 className="mt-2 text-2xl font-bold text-white">Current conditions</h2>
-                </div>
-                <div className="rounded-full bg-emerald-500/15 px-3 py-1.5 text-xs font-semibold text-emerald-300 ring-1 ring-emerald-400/40">
-                  Safe flow
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                {trafficData.slice(0, 4).map((item) => (
-                  <div key={item.area} className="flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
-                    <div>
-                      <p className="text-white">{item.area}</p>
-                      <p className="text-sm text-slate-400">{item.note}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold text-emerald-300">{item.condition}</p>
-                      <p className="text-xs text-slate-400">{item.eta}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <TrafficSafetyVideo />
           </motion.div>
         </div>
       </section>

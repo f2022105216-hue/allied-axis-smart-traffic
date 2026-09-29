@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { Ambulance, Flame, Phone, ShieldAlert } from 'lucide-react'
+import PageBackdrop from '../components/PageBackdrop'
+import EmergencyScene from '../components/EmergencyScene'
 
 const emergencyServices = [
   { name: 'Police', number: '100', description: 'For emergencies, safety concerns, and road incidents.', icon: ShieldAlert },
@@ -10,7 +12,8 @@ const emergencyServices = [
 
 function Emergency() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <PageBackdrop variant="emergency" />
       {/* Emergency Contacts Section */}
       <div className="mb-10">
         <p className="text-sm uppercase tracking-[0.25em] text-emerald-300">Emergency</p>
@@ -29,6 +32,7 @@ function Emergency() {
               transition={{ duration: 0.35, delay: index * 0.06 }}
               className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5"
             >
+              <EmergencyScene service={service.name} />
               <div className="mb-4 inline-flex rounded-xl bg-emerald-500/10 p-3 text-emerald-300 ring-1 ring-emerald-400/30">
                 <Icon className="h-6 w-6" />
               </div>

@@ -1,4 +1,8 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
+import showSuccessAlert from '../utils/showSuccessAlert'
+import PageBackdrop from '../components/PageBackdrop'
+import ContactScene from '../components/ContactScene'
 
 const initialData = {
   name: '',
@@ -38,18 +42,29 @@ function Contact() {
     if (Object.keys(newErrors).length === 0) {
       setSubmitted(true)
       setFormData(initialData)
+      showSuccessAlert('Message sent!', 'Thanks for contacting us. We will get back to you soon.')
     }
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <PageBackdrop variant="default" />
       {/* Contact Section */}
       <div className="mb-10 max-w-2xl">
         <p className="text-sm uppercase tracking-[0.25em] text-emerald-300">Contact</p>
         <h1 className="mt-3 text-4xl font-black text-white">We’d love to hear from you</h1>
       </div>
 
-      <form onSubmit={handleSubmit} className="rounded-[2rem] border border-slate-800 bg-slate-900/80 p-6 sm:p-8">
+      <ContactScene />
+
+      <motion.form
+        onSubmit={handleSubmit}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+        className="rounded-[2rem] border border-slate-800 bg-slate-900/80 p-6 sm:p-8"
+      >
         <div className="grid gap-6 md:grid-cols-2">
           <div>
             <label className="mb-2 block text-sm text-slate-300">Name</label>
@@ -87,7 +102,7 @@ function Contact() {
             </div>
           )}
         </div>
-      </form>
+      </motion.form>
     </div>
   )
 }
