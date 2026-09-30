@@ -13,7 +13,7 @@ function TrafficSigns() {
 
   return (
     <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <PageBackdrop variant="traffic" />
+      <PageBackdrop variant="signs" />
 
       {/* Header reveal: this creates a smoother page intro before the section content appears. */}
       <motion.div

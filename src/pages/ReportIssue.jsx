@@ -48,7 +48,7 @@ function ReportIssue() {
 
   return (
     <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-      <PageBackdrop variant="emergency" />
+      <PageBackdrop variant="report" />
       {/* Report an Issue Section */}
       <div className="mb-10">
         <p className="text-sm uppercase tracking-[0.25em] text-emerald-300">Report an issue</p>

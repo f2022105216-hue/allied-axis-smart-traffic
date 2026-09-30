@@ -291,7 +291,7 @@ function TrafficRules() {
 
   return (
     <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <PageBackdrop variant="default" />
+      <PageBackdrop variant="rules" />
 
       {/* Header intro: reveals the section smoothly before the rules cards appear. */}
       <motion.div

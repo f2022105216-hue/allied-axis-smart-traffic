@@ -9,9 +9,9 @@ import TrafficCard from '../components/TrafficCard'
 import AlertCard from '../components/AlertCard'
 import SafetyTipCard from '../components/SafetyTipCard'
 import TrafficSignCard from '../components/TrafficSignCard'
-import PageBackdrop from '../components/PageBackdrop'
 import TrafficSafetyVideo from '../components/TrafficSafetyVideo'
 import heroImage from '../assets/hero.png'
+import trafficRoadImage from '../assets/traffic-road-background.jpeg'
 
 function Home() {
   const statusHighlights = [
@@ -22,10 +22,17 @@ function Home() {
   ]
 
   return (
-    <div className="relative bg-slate-950 text-white">
-      <PageBackdrop variant="traffic" />
+    <div
+      className="relative bg-slate-950 text-white"
+      style={{
+        backgroundImage: `linear-gradient(rgba(2, 6, 23, 0.58), rgba(2, 6, 23, 0.72)), url(${trafficRoadImage})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+      }}
+    >
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.18),_transparent_35%),linear-gradient(135deg,#020617_0%,#0f172a_40%,#111827_100%)]">
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.16),_transparent_35%),linear-gradient(135deg,rgba(2,6,23,0.44)_0%,rgba(15,23,42,0.52)_40%,rgba(17,24,39,0.5)_100%)]">
         <motion.div
           className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
           aria-hidden="true"
