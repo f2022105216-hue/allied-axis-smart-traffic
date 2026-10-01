@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import showSuccessAlert from '../utils/showSuccessAlert'
+import { Toaster, toast } from 'sonner'
+import 'sonner/dist/styles.css'
+import FormSuccessToastIcon from '../components/FormSuccessToastIcon'
 import PageBackdrop from '../components/PageBackdrop'
 import ContactScene from '../components/ContactScene'
 
@@ -42,12 +44,27 @@ function Contact() {
     if (Object.keys(newErrors).length === 0) {
       setSubmitted(true)
       setFormData(initialData)
-      showSuccessAlert('Message sent!', 'Thanks for contacting us. We will get back to you soon.')
+      toast.success('Message sent!', {
+        description: 'Thanks for contacting us. We will get back to you soon.',
+        duration: 5000,
+        closeButton: true,
+        icon: <FormSuccessToastIcon />,
+        style: {
+          background: '#081b2a',
+          border: '1px solid rgba(16, 185, 129, 0.6)',
+          color: '#ecfeff',
+          borderRadius: '18px',
+          boxShadow: '0 12px 30px rgba(16, 185, 129, 0.28)',
+          padding: '14px 16px',
+        },
+        className: 'sonner-form-toast',
+      })
     }
   }
 
   return (
     <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <Toaster richColors closeButton position="top-center" />
       <PageBackdrop variant="default" />
       {/* Contact Section */}
       <div className="mb-10 max-w-2xl">
@@ -97,7 +114,7 @@ function Contact() {
           </button>
 
           {submitted && (
-            <div className="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-300">
+            <div className="inline-success-badge">
               Your message has been sent successfully.
             </div>
           )}

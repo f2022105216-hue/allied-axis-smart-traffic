@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import showSuccessAlert from '../utils/showSuccessAlert'
+import { Toaster, toast } from 'sonner'
+import 'sonner/dist/styles.css'
+import FormSuccessToastIcon from '../components/FormSuccessToastIcon'
 import PageBackdrop from '../components/PageBackdrop'
 
 const initialData = {
@@ -42,12 +44,27 @@ function ReportIssue() {
     if (Object.keys(newErrors).length === 0) {
       setSubmitted(true)
       setFormData(initialData)
-      showSuccessAlert('Issue reported!', 'Your road safety concern has been recorded and the team will review it shortly.')
+      toast.success('Issue reported!', {
+        description: 'Your road safety concern has been recorded and the team will review it shortly.',
+        duration: 5000,
+        closeButton: true,
+        icon: <FormSuccessToastIcon />,
+        style: {
+          background: '#081b2a',
+          border: '1px solid rgba(16, 185, 129, 0.6)',
+          color: '#ecfeff',
+          borderRadius: '18px',
+          boxShadow: '0 12px 30px rgba(16, 185, 129, 0.28)',
+          padding: '14px 16px',
+        },
+        className: 'sonner-form-toast',
+      })
     }
   }
 
   return (
     <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <Toaster richColors closeButton position="top-center" />
       <PageBackdrop variant="report" />
       {/* Report an Issue Section */}
       <div className="mb-10">
@@ -107,7 +124,7 @@ function ReportIssue() {
           </button>
 
           {submitted && (
-            <div className="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-300">
+            <div className="inline-success-badge">
               Your issue report has been submitted successfully.
             </div>
           )}

@@ -58,6 +58,7 @@ function AlertCard({ title, location, time, category, description, severity }) {
           </motion.div>
           <p className="text-sm leading-6 text-slate-300">{description}</p>
         </div>
+
       </div>
     </motion.article>
   )
